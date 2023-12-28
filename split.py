@@ -70,17 +70,22 @@ class Split:
         return united.centroid.to_crs(mask.crs)
     
     def calc_patch_pixel_bounds(self, centr_coord_x,centr_coord_y, width, height):
+        
         left = max(0, centr_coord_x - self.patch_size_/2)
-        if left == 0:
-            right = min(width, self.patch_size_)
-        else:
-            right = min(width, centr_coord_x + self.patch_size_/2)
+        right = min(width, centr_coord_x + self.patch_size_/2)
+        
+        if (left == 0):
+            right = min(width, self.patch_size_) # Patch Size is always smaller than width but this makes code more clear imo
+        if (right == width):
+            left = max(0, width - self.patch_size_)
 
         top = max(0, centr_coord_y - self.patch_size_/2)
-        if top == 0:
-            bottom = min(height, self.patch_size)
-        else:
-            bottom = min(height, centr_coord_y + self.patch_size_/2)
+        bottom = min(height, centr_coord_y + self.patch_size_/2)
+
+        if (top == 0):  
+            bottom = min(height, self.patch_size_)
+        if (bottom == height):
+            top = max(0, height - self.patch_size_)
 
         return left, bottom, right, top
     
@@ -125,7 +130,7 @@ class Split:
      
     def process(self):
         
-        for filename in tqdm(os.listdir(self.input_folder_masks_), desc='Splitting masks', position = 0):
+        for filename in tqdm(os.listdir(self.input_folder_masks_), desc='Splitting...', position = 0):
             identifier = 0
             mask_path = os.path.join(self.input_folder_masks_, filename)
             image_path = os.path.join(self.input_folder_images_, filename)
