@@ -184,10 +184,10 @@ class Split:
 
 def main():
     parser = argparse.ArgumentParser(description='Split images and masks into patches.')
-    parser.add_argument('--input-folder-images', default="temp/images_preprocessed_non_split",type=str, help='Path to the folder containing input images')
-    parser.add_argument('--input-folder-masks', default="temp/masks_preprocessed_non_split",type=str, help='Path to the folder containing input images')
-    parser.add_argument('--output-folder-masks', default="temp/masks_preprocessed_split", type=str, help='Path to the folder where patches will be saved')
-    parser.add_argument('--output-folder-images', default="temp/images_preprocessed_split",type=str, help='Path to the folder where patches will be saved')
+    parser.add_argument('--input-folder-images', default="../temp/images_preprocessed_non_split",type=str, help='Path to the folder containing input images')
+    parser.add_argument('--input-folder-masks', default="../temp/masks_preprocessed_non_split",type=str, help='Path to the folder containing input images')
+    parser.add_argument('--output-folder-masks', default="../temp/masks_preprocessed_split", type=str, help='Path to the folder where patches will be saved')
+    parser.add_argument('--output-folder-images', default="../temp/images_preprocessed_split",type=str, help='Path to the folder where patches will be saved')
     parser.add_argument('--patch-size', type=int, help='Size of the patches.')
     # parser.add_argument('--overlay', type=int, help='Overlap between patches. (If step=patch_size, there is no overlap.)')
     # parser.add_argument('--empty', type=int, help='Overlap between patches. (If step=patch_size, there is no overlap.)')

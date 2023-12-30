@@ -68,8 +68,8 @@ def main():
     parser = argparse.ArgumentParser(description="Generate masks from images based on GeoJSON polygons.")
     parser.add_argument("--tif-folder", help="Path to the folder containing TIFF images.")
     parser.add_argument("--geojson-folder", help="Path to the folder containing GeoJSON files.")
-    parser.add_argument("--output-image-folder", default= os.path.join("temp","images_preprocessed_non_split"),help="Path to the output folder for processed images.")
-    parser.add_argument("--output-mask-folder", default= os.path.join("temp","masks_preprocessed_non_split"),help="Path to the output folder for generated masks.")
+    parser.add_argument("--output-image-folder", default= os.path.join("../temp","images_preprocessed_non_split"),help="Path to the output folder for processed images.")
+    parser.add_argument("--output-mask-folder", default= os.path.join("../temp","masks_preprocessed_non_split"),help="Path to the output folder for generated masks.")
     args = parser.parse_args()
 
     masker = Snap(args.tif_folder, args.geojson_folder, args.output_image_folder, args.output_mask_folder)
