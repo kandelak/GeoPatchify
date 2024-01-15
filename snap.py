@@ -68,11 +68,22 @@ def main():
     parser = argparse.ArgumentParser(description="Generate masks from images based on GeoJSON polygons.")
     parser.add_argument("--tif-folder", help="Path to the folder containing TIFF images.")
     parser.add_argument("--geojson-folder", help="Path to the folder containing GeoJSON files.")
-    parser.add_argument("--output-image-folder", default= os.path.join("../temp","images_preprocessed_non_split"),help="Path to the output folder for processed images.")
-    parser.add_argument("--output-mask-folder", default= os.path.join("../temp","masks_preprocessed_non_split"),help="Path to the output folder for generated masks.")
+    parser.add_argument("--output-image-folder", default= "../temp",help="Path to the output folder for processed images.")
+    parser.add_argument("--output-mask-folder", default= "../temp",help="Path to the output folder for generated masks.")
     args = parser.parse_args()
 
-    masker = Snap(args.tif_folder, args.geojson_folder, args.output_image_folder, args.output_mask_folder)
+    os.makedirs(args.output_image_folder, exist_ok=True)
+
+    tif_folder = args.tif_folder
+    geojson_folder = args.geojson_folder
+    output_image_folder = args.output_image_folder
+    output_mask_folder = args.output_mask_folder
+    
+    dataset_type = tif_folder.split(os.sep)[-1]
+    output_image_folder = os.path.join(output_image_folder, dataset_type, "images")
+    output_mask_folder = os.path.join(output_mask_folder, dataset_type, "masks")
+
+    masker = Snap(tif_folder, geojson_folder, output_image_folder, output_mask_folder)
     masker.process()
 
 if __name__ == "__main__":

@@ -112,7 +112,7 @@ class Split:
         
         transform = rasterio.transform.from_bounds(minx,miny,maxx,maxy, w, h)
 
-        mask = rasterio.features.geometry_mask([unioned], transform=transform, invert=False, out_shape=(h, w))
+        mask = rasterio.features.geometry_mask([unioned], transform=transform, invert=True, out_shape=(h, w))
 
         return mask
     
@@ -185,9 +185,9 @@ class Split:
 def main():
     parser = argparse.ArgumentParser(description='Split images and masks into patches.')
     parser.add_argument('--input-folder-images', default="../temp/images_preprocessed_non_split",type=str, help='Path to the folder containing input images')
-    parser.add_argument('--input-folder-masks', default="../temp/masks_preprocessed_non_split",type=str, help='Path to the folder containing input images')
-    parser.add_argument('--output-folder-masks', default="../temp/masks_preprocessed_split", type=str, help='Path to the folder where patches will be saved')
-    parser.add_argument('--output-folder-images', default="../temp/images_preprocessed_split",type=str, help='Path to the folder where patches will be saved')
+    parser.add_argument('--input-folder-masks', default="../temp/masks_preprocessed_non_split",type=str, help='Path to the folder containing input masks')
+    parser.add_argument('--output-folder-masks', default="../temp/masks_preprocessed_split", type=str, help='Path to the folder where patched masks will be saved')
+    parser.add_argument('--output-folder-images', default="../temp/images_preprocessed_split",type=str, help='Path to the folder where patched images will be saved')
     parser.add_argument('--patch-size', type=int, help='Size of the patches.')
     # parser.add_argument('--overlay', type=int, help='Overlap between patches. (If step=patch_size, there is no overlap.)')
     # parser.add_argument('--empty', type=int, help='Overlap between patches. (If step=patch_size, there is no overlap.)')
